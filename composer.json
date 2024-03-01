@@ -1,5 +1,5 @@
 {
-    "name": "hubertinio/sylius-example-plugin",
+    "name": "hubertinio/sylius-keyvalue-plugin",
     "type": "sylius-plugin",
     "description": "Hubertinio example plugin for Sylius.",
     "keywords": [
@@ -64,8 +64,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Hubertinio\\SyliusExamplePlugin\\": "src/",
-            "Tests\\Hubertinio\\SyliusExamplePlugin\\": "tests/"
+            "Hubertinio\\SyliusKeyValuePlugin\\": "src/",
+            "Tests\\Hubertinio\\SyliusKeyValuePlugin\\": "tests/"
         }
     },
     "autoload-dev": {

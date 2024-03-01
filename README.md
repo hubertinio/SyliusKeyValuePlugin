@@ -18,13 +18,8 @@ git clone git@github.com:hubertinio/SyliusExamplePlugin.git SyliusUnicornPlugin
 
 Let's assume that the new plugin is Vendor\SyliusUnicornPlugin
 
-- update name in the composer.json into `vendor\vendor-sylius-unicorn-plugin`
-- find and replace `Hubertinio\\\\SyliusExamplePlugin` into `Vendor\\\\SyliusUnicornPlugin`
-- find and replace `Hubertinio\SyliusExamplePlugin` into `Vendor\SyliusUnicornPlugin`
-- find and replace with case-sensitive `HubertinioSyliusExamplePlugin` into `VendorSyliusUnicornPlugin`
-- find and replace with case-sensitive `hubertiniosyliusexampleplugin` into `vendorsyliusunicornplugin`
-- find and replace `hubertinio_sylius_example` into `vendor_sylius_unicorn`
-- refactor class and file name `src/HubertinioSyliusExamplePlugin.php` into `VendorSyliusUnicornPlugin.php` 
+
+- refactor class and file name `src/HubertinioSyliuskKeyValuePlugin.php` into `VendorSyliusUnicornPlugin.php` 
 - refactor class and file name `src/DependencyInjection/HubertinioSyliusExampleExtension.php` into `src/DependencyInjection/VendorSyliusUnicornExtension.php`
 
 

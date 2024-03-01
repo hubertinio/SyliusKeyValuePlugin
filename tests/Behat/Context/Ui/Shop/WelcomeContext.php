@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Hubertinio\SyliusExamplePlugin\Behat\Context\Ui\Shop;
+namespace Tests\Hubertinio\SyliusKeyValuePlugin\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
-use Tests\Hubertinio\SyliusExamplePlugin\Behat\Page\Shop\WelcomePageInterface;
+use Tests\Hubertinio\SyliusKeyValuePlugin\Behat\Page\Shop\WelcomePageInterface;
 use Webmozart\Assert\Assert;
 
 final class WelcomeContext implements Context
