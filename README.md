@@ -11,24 +11,21 @@
 ## Init
 
 ```
-git clone git@github.com:hubertinio/SyliusExamplePlugin.git sylius-unicorn-plugin
-cd sylius-unicorn-plugin
-git remote remove origin
-; create repo
-git remote add origin git@github.com:hubertinio/SyliusUnicornPlugin.git
-git push -u origin 1.12
+git clone git@github.com:hubertinio/SyliusExamplePlugin.git SyliusUnicornPlugin
 ```
 
 ## What to rename?
 
-- name in the composer.json
-- find and replace "Hubertinio\\\\SyliusExamplePlugin" into "Hubertinio\\\\SyliusUnicornPlugin"
-- find and replace "Hubertinio\SyliusExamplePlugin" into "Hubertinio\SyliusUnicornPlugin"
-- find and replace with case-sensitive "HubertinioSyliusExamplePlugin" into "HubertinioSyliusUnicornPlugin"
-- find and replace with case-sensitive "hubertiniosyliusexampleplugin" into "hubertiniosyliusunicornplugin"
-- find and replace "hubertinio_sylius_example" into "hubertinio_sylius_unicorn"
-- refactor class and file name src/HubertinioSyliusExamplePlugin.php
-- refactor class and file name DependencyInjection/HubertinioSyliusExampleExtension.php
+Let's assume that the new plugin is Vendor\SyliusUnicornPlugin
+
+- update name in the composer.json into `vendor\vendor-sylius-unicorn-plugin`
+- find and replace `Hubertinio\\\\SyliusExamplePlugin` into `Vendor\\\\SyliusUnicornPlugin`
+- find and replace `Hubertinio\SyliusExamplePlugin` into `Vendor\SyliusUnicornPlugin`
+- find and replace with case-sensitive `HubertinioSyliusExamplePlugin` into `VendorSyliusUnicornPlugin`
+- find and replace with case-sensitive `hubertiniosyliusexampleplugin` into `vendorsyliusunicornplugin`
+- find and replace `hubertinio_sylius_example` into `vendor_sylius_unicorn`
+- refactor class and file name `src/HubertinioSyliusExamplePlugin.php` into `VendorSyliusUnicornPlugin.php` 
+- refactor class and file name `src/DependencyInjection/HubertinioSyliusExampleExtension.php` into `src/DependencyInjection/VendorSyliusUnicornExtension.php`
 
 
 ## Composer install
@@ -39,7 +36,7 @@ Set private repository.
     "repositories": [
         {
             "type": "vcs",
-            "url": "git@github.com:hubertinio/SyliusUnicornPlugin.git"
+            "url": "git@github.com:vendor/SyliusUnicornPlugin.git"
         }
     ],
 ```
@@ -47,13 +44,13 @@ Set private repository.
 Install.
 
 ```
-composer require hubertinio/sylius-unicorn-plugin:1.12.x-dev
+composer require vendor/sylius-unicorn-plugin:1.12.x-dev
 ```
 
 
 ## Register plugin
 
-Insert into `config/bundles.php` array that line:
+Insert into `tests/Application/config/bundles.php` array that line:
 
 ```
 Hubertinio\SyliusUnicornPlugin\HubertinioSyliusUnicornPlugin::class => ['all' => true],
@@ -64,8 +61,8 @@ Hubertinio\SyliusUnicornPlugin\HubertinioSyliusUnicornPlugin::class => ['all' =>
 Insert into `tests/Application/config/routes.yaml` this content:
 
 ```
-hubertinio_sylius_example_plugin:
-    resource: "@HubertinioSyliusExamplelugin/config/routing.yml"
+vendor_sylius_unicorn_plugin:
+    resource: "@VendorSyliusUnicornPlugin/config/routing.yml"
 ```
 
 ## Documentation
