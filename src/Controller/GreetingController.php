@@ -14,12 +14,12 @@ final class GreetingController extends AbstractController
 {
     public function staticallyGreetAction(?string $name): Response
     {
-        return $this->render('@HubertinioSyliuskKeyValuePlugin/static_greeting.html.twig', ['greeting' => $this->getGreeting($name)]);
+        return $this->render('@HubertinioSyliusKeyValuePlugin/static_greeting.html.twig', ['greeting' => $this->getGreeting($name)]);
     }
 
     public function dynamicallyGreetAction(?string $name): Response
     {
-        return $this->render('@HubertinioSyliuskKeyValuePlugin/dynamic_greeting.html.twig', ['greeting' => $this->getGreeting($name)]);
+        return $this->render('@HubertinioSyliusKeyValuePlugin/dynamic_greeting.html.twig', ['greeting' => $this->getGreeting($name)]);
     }
 
     private function getGreeting(?string $name): string

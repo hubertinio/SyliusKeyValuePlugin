@@ -4,5 +4,5 @@
 #            blocks:
 #                scripts:
 #                    # Path to src/Resources/views/_checkout.html.twig
-#                    template: "@HubertinioSyliuskKeyValuePlugin/_checkout.html.twig"
+#                    template: "@HubertinioSyliusKeyValuePlugin/_checkout.html.twig"
 #                    priority: 10

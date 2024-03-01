@@ -8,68 +8,12 @@
 
 <p align="center">Skeleton for starting Sylius plugins.</p>
 
-## Init
-
-```
-git clone git@github.com:hubertinio/SyliusExamplePlugin.git SyliusUnicornPlugin
-```
-
-## What to rename?
-
-Let's assume that the new plugin is Vendor\SyliusUnicornPlugin
-
-
-- refactor class and file name `src/HubertinioSyliuskKeyValuePlugin.php` into `VendorSyliusUnicornPlugin.php` 
-- refactor class and file name `src/DependencyInjection/HubertinioSyliusExampleExtension.php` into `src/DependencyInjection/VendorSyliusUnicornExtension.php`
-
-
-## Composer install
-
-Set private repository.
-
-```
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:vendor/SyliusUnicornPlugin.git"
-        }
-    ],
-```
-
-Install.
-
-```
-composer require vendor/sylius-unicorn-plugin:1.12.x-dev
-```
-
-
-## Register plugin
-
-Insert into `tests/Application/config/bundles.php` array that line:
-
-```
-Hubertinio\SyliusUnicornPlugin\HubertinioSyliusUnicornPlugin::class => ['all' => true],
-```
-
-## How to add routing?
-
-Insert into `tests/Application/config/routes.yaml` this content:
-
-```
-vendor_sylius_unicorn_plugin:
-    resource: "@VendorSyliusUnicornPlugin/config/routing.yml"
-```
-
-## Documentation
-
-For a comprehensive guide on Sylius Plugins development please go to Sylius documentation,
-there you will find the <a href="https://docs.sylius.com/en/latest/plugin-development-guide/index.html">Plugin Development Guide</a>, that is full of examples.
-
-## Quickstart Installation
-
 ### Docker
 
 1. Execute `make build-containers` and `make start-containers`
+
+docker-compose run --rm app composer install --no-scripts --no-interaction --no-progress --no-suggest
+
 
 2. Initialize plugin `make install`
 

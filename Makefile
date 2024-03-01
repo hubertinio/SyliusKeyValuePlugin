@@ -79,7 +79,9 @@ security: ## Check security issues in project dependencies
 ##
 
 composer-install: ## Install project dependencies
-	$(COMPOSER) install
+	docker-compose run --rm app composer install --no-scripts --no-interaction --no-progress --no-suggest
+	git clean -f -d
+	git clean -f
 
 composer-reinstall: ## Reinstall composer dependencies
 	$(COMPOSER) clearcache
@@ -132,9 +134,13 @@ install-backend: ## Install backend
 
 install-frontend: ## Install frontend
 	$(NODE_CONT) yarn install --pure-lockfile
-	$(NODE_CONT) GULP_ENV=prod yarn build
+	$(NODE_CONT) sh -c "GULP_ENV=prod yarn build"
 
-install: install-backend install-frontend
+install: ## Install everything
+	make composer-install
+	make install-backend
+	make install-frontend
+	make front-assets
 
 phpunit: ## Run phpunit
 	vendor/bin/phpunit

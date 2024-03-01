@@ -37,7 +37,7 @@ final class HubertinioSyliusKeyValueExtension extends AbstractResourceExtension 
 
     protected function getMigrationsDirectory(): string
     {
-        return '@HubertinioSyliuskKeyValuePlugin/migrations';
+        return '@HubertinioSyliusKeyValuePlugin/migrations';
     }
 
     protected function getNamespacesOfMigrationsExecutedBefore(): array
