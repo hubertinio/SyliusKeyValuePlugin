@@ -1,0 +1,8 @@
+#sylius_ui:
+#    events:
+#        sylius.shop.checkout.select_payment.before_navigation:
+#            blocks:
+#                scripts:
+#                    # Path to src/Resources/views/_checkout.html.twig
+#                    template: "@HubertinioSyliusExamplePlugin/_checkout.html.twig"
+#                    priority: 10
