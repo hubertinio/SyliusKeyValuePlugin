@@ -42,8 +42,7 @@ services:
         working_dir: /app/tests/Application
         volumes:
             - ./:/app
-#        command: yarn install --pure-lockfile
-        command: yarn watch
+        command: sh -c "yarn install --pure-lockfile; yarn watch"
 
     mysql:
         image: mysql:8.0
