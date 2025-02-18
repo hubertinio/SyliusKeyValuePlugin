@@ -74,6 +74,10 @@ ps: ## Display status of running containers
 security: ## Check security issues in project dependencies
 	$(SYMFONY_CLI) security:check
 
+cache-clear: ## Clear cache
+	$(SYMFONY) cache:clear
+	$(SYMFONY) cache:pool:prune
+
 ##
 ## —— Composer 🎼 ———————————————————————————————————————————————————————————————
 ##

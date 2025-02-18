@@ -1,14 +1,9 @@
 <?php
 
-namespace Hubertinio\SyliusKeyValuePlugin\Service;
+namespace Hubertinio\SyliusKeyValuePlugin\Storage;
 
-interface KeyValueStoreInterface
+interface KeyValueStorageInterface
 {
-    /**
-     * Returns the name of this collection.
-     */
-    public function getCollectionName(): string;
-
     /**
      * Returns whether a given key exists in the store.
      */
@@ -32,7 +27,7 @@ interface KeyValueStoreInterface
     /**
      * Saves a value for a given key.
      */
-    public function set(string $key, mixed $value);
+    public function set(string $key, mixed $value): void;
 
     /**
      * Saves a value for a given key if it does not exist yet.
@@ -47,7 +42,7 @@ interface KeyValueStoreInterface
     /**
      * Renames a key.
      */
-    public function rename(string $key, string $new_key);
+    public function rename(string $key, string $newKey): void;
 
     /**
      * Deletes an item from the key/value store.
@@ -63,5 +58,4 @@ interface KeyValueStoreInterface
      * Deletes all items from the key/value store.
      */
     public function deleteAll(): void;
-
 }
