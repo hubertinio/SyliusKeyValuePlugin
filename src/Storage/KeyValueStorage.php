@@ -56,17 +56,15 @@ class KeyValueStorage implements KeyValueStorageInterface
 
     public function set(string $key, mixed $value, ?string $collection = null): void
     {
-        try {
-            Assert::nullOrScalar($collection);
-            $keyValue = $this->repository->findByKeyAndCollection($key, $collection);
-            if (!$keyValue) {
-                $keyValue = new KeyValue($key, $value, $collection);
-            }
-            $keyValue->setValue($value);
-            $this->repository->save($keyValue);
-        } catch (\Exception $e) {
-            $this;
+        Assert::nullOrScalar($collection);
+        $keyValue = $this->repository->findByKeyAndCollection($key, $collection);
+
+        if (!$keyValue) {
+            $keyValue = new KeyValue($key, $value, $collection);
         }
+
+        $keyValue->setValue($value);
+        $this->repository->save($keyValue);
     }
 
     public function setIfNotExists(string $key, mixed $value, ?string $collection = null): bool

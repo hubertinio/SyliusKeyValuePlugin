@@ -1,6 +1,6 @@
 <?php
 
-use Hubertinio\SyliusKeyValuePlugin\Command\TestCommand;
+use Hubertinio\SyliusKeyValuePlugin\Command\ExampleCommand;
 use Hubertinio\SyliusKeyValuePlugin\Helper\CacheKeyGenerator;
 use Hubertinio\SyliusKeyValuePlugin\Repository\KeyValueRepository;
 use Hubertinio\SyliusKeyValuePlugin\Storage\KeyValueStorage;
@@ -52,10 +52,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->arg('$cacheKeyGenerator', service($servicesIdPrefix . 'helper.cache_key_generator'));
 
     $services
-        ->set($servicesIdPrefix . 'command.test', TestCommand::class)
+        ->set($servicesIdPrefix . 'command.example', ExampleCommand::class)
         ->arg('$keyValueStorage', service($servicesIdPrefix . 'storage'))
         ->arg('$keyValueStorageCacheable', service($servicesIdPrefix . 'storage.cacheable'))
         ->arg('$userKeyValueStorage', service($servicesIdPrefix . 'storage.user'))
+        ->arg('$adminRepository', service('sylius.repository.admin_user'))
         ->tag('console.command')
         ->public();
 

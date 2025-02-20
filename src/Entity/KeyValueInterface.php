@@ -2,9 +2,12 @@
 
 namespace Hubertinio\SyliusKeyValuePlugin\Entity;
 
-use DateTime;
+use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
-interface KeyValueInterface
+interface KeyValueInterface extends
+    TimestampableInterface,
+    ResourceInterface
 {
     public function getId(): int;
 
@@ -19,8 +22,4 @@ interface KeyValueInterface
     public function getCollection(): ?string;
 
     public function setCollection(?string $collection): KeyValue;
-
-    public function getCreatedAt(): DateTime;
-
-    public function getUpdatedAt(): DateTime;
 }

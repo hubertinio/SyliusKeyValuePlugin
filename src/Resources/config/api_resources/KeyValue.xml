@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd">
+
+    <resource class="%hubertinio_sylius_key_value_plugin.model.key_value.class%" shortName="KeyValue">
+        <attribute name="validation_groups">hubertinio.key_value</attribute>
+
+        <collectionOperations>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/key-value</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:key_value:read</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/key-value</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:key_value:create</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/key-value</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:key_value:read</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/key-value/{key}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:key_value:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/admin/key-value/{key}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:key_value:update</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/key-value/{key}</attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/key-value/{key}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:key_value:read</attribute>
+                </attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <property name="id" identifier="false" writable="false" />
+        <property name="key" identifier="true" required="true" readable="true" writable="true">
+            <attribute name="openapi_context">
+                <attribute name="type">string</attribute>
+                <attribute name="example">theme</attribute>
+            </attribute>
+        </property>
+        <property name="value" required="true" readable="true" writable="true">
+            <attribute name="openapi_context">
+                <attribute name="type">json</attribute>
+                <attribute name="example">{"color":"dark"}</attribute>
+            </attribute>
+        </property>
+        <property name="collection" required="false" readable="true" writable="true">
+            <attribute name="openapi_context">
+                <attribute name="type">string</attribute>
+                <attribute name="example">user_preferences</attribute>
+            </attribute>
+        </property>
+        <property name="createdAt" writable="false" readable="true"/>
+        <property name="updatedAt" writable="false" readable="true"/>
+    </resource>
+</resources>

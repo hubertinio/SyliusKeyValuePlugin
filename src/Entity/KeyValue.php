@@ -5,12 +5,15 @@ namespace Hubertinio\SyliusKeyValuePlugin\Entity;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Hubertinio\SyliusKeyValuePlugin\Repository\KeyValueRepository;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 
 #[ORM\Entity(repositoryClass: KeyValueRepository::class)]
 #[ORM\Table(name: 'hubertinio_key_value')]
 #[ORM\UniqueConstraint(name: 'key_collection', columns: ['`key`', 'collection'])]
 class KeyValue implements KeyValueInterface
 {
+    use TimestampableTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -25,19 +28,11 @@ class KeyValue implements KeyValueInterface
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $collection = null;
 
-    #[ORM\Column(type: 'datetime')]
-    private DateTime $createdAt;
-
-    #[ORM\Column(type: 'datetime')]
-    private DateTime $updatedAt;
-
     public function __construct(string $key, mixed $value = null, ?string $collection = null)
     {
         $this->key = $key;
         $this->value = $value;
         $this->collection = $collection;
-        $this->createdAt = new DateTime();
-        $this->updatedAt = new DateTime();
     }
 
     public function getId(): int
@@ -77,15 +72,5 @@ class KeyValue implements KeyValueInterface
     {
         $this->collection = $collection;
         return $this;
-    }
-
-    public function getCreatedAt(): DateTime
-    {
-        return $this->createdAt;
-    }
-
-    public function getUpdatedAt(): DateTime
-    {
-        return $this->updatedAt;
     }
 }

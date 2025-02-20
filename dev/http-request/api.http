@@ -1,0 +1,21 @@
+### Authentication
+POST {{ host }}/api/v2/admin/authentication-token
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "{{ admin_email }}",
+  "password": "{{ admin_password }}"
+}
+
+> {% client.global.set("jwt_token", response.body.token); %}
+
+### GET collection
+GET {{ host }}/api/v2/admin/key-value
+Authorization: Bearer {{jwt_token}}
+
+### GET item
+GET {{ host }}/api/v2/admin/key-value/arr?collection=user_123
+Authorization: Bearer {{jwt_token}}
+
+###

@@ -18,6 +18,6 @@ Manage key/value storage collection.
 
 ## TODO
 
-- sylius resource: src/Resources/config/config.yaml
+- handle remove user keys on user remove event
 - API platform support + tests
-- channel support + tests
+- sylius resource: src/Resources/config/config.yaml

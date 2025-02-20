@@ -5,7 +5,7 @@ sylius_resource:
       classes:
         model: Hubertinio\SyliusKeyValuePlugin\Entity\KeyValue
         interface: Hubertinio\SyliusKeyValuePlugin\Entity\KeyValueInterface
-        form: ~
+        form: Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType
         repository: Hubertinio\SyliusKeyValuePlugin\Repository\KeyValueRepository
         controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
         factory: Sylius\Component\Resource\Factory\Factory
