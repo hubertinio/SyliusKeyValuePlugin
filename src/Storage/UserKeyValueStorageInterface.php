@@ -59,5 +59,5 @@ interface UserKeyValueStorageInterface
     /**
      * Deletes all items from the key/value store.
      */
-    public function deleteAll(UserInterface $use): void;
+    public function deleteAll(UserInterface $user): void;
 }

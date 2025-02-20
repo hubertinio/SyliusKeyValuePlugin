@@ -20,7 +20,7 @@ class TestCommand extends Command
 
     public function configure(): void
     {
-        $this->setName('sylius:key-value:storage');
+        $this->setName('hubertinio:key-value:storage');
         $this->setDescription('Debug storage');
     }
 

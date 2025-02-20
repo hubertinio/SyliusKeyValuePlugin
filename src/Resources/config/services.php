@@ -1,6 +1,7 @@
 <?php
 
 use Hubertinio\SyliusKeyValuePlugin\Command\TestCommand;
+use Hubertinio\SyliusKeyValuePlugin\Helper\CacheKeyGenerator;
 use Hubertinio\SyliusKeyValuePlugin\Repository\KeyValueRepository;
 use Hubertinio\SyliusKeyValuePlugin\Storage\KeyValueStorage;
 use Hubertinio\SyliusKeyValuePlugin\Storage\KeyValueStorageCacheable;
@@ -42,11 +43,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services
         ->set($servicesIdPrefix . 'storage.cacheable_key_value', KeyValueStorageCacheable::class)
         ->arg('$keyValueStorage', service($servicesIdPrefix . 'storage.database_key_value'))
+        ->arg('$cacheKeyGenerator', service($servicesIdPrefix . 'helper.cache_key_generator'))
         ->arg('$cache', service('cache.app'));
 
     $services
         ->set($servicesIdPrefix . 'storage.user_key_value', UserKeyValueStorage::class)
-        ->arg('$keyValueStorage', service($servicesIdPrefix . 'storage.cacheable'));
+        ->arg('$keyValueStorage', service($servicesIdPrefix . 'storage.cacheable'))
+        ->arg('$cacheKeyGenerator', service($servicesIdPrefix . 'helper.cache_key_generator'));
 
     $services
         ->set($servicesIdPrefix . 'command.test', TestCommand::class)
@@ -54,5 +57,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->arg('$keyValueCacheable', service($servicesIdPrefix . 'storage.cacheable'))
         ->arg('$userKeyValue', service($servicesIdPrefix . 'storage.user'))
         ->tag('console.command')
+        ->public();
+
+    $services
+        ->set($servicesIdPrefix . 'helper.cache_key_generator', CacheKeyGenerator::class)
         ->public();
 };

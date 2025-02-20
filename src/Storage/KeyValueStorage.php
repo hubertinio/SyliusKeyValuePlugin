@@ -4,6 +4,7 @@ namespace Hubertinio\SyliusKeyValuePlugin\Storage;
 
 use Hubertinio\SyliusKeyValuePlugin\Entity\KeyValue;
 use Hubertinio\SyliusKeyValuePlugin\Repository\KeyValueRepository;
+use Webmozart\Assert\Assert;
 
 class KeyValueStorage implements KeyValueStorageInterface
 {
@@ -12,76 +13,128 @@ class KeyValueStorage implements KeyValueStorageInterface
     ) {
     }
 
-    public function has(string $key): bool
+    public function has(string $key, ?string $collection = null): bool
     {
-        return $this->repository->findByKey($key) !== null;
+        Assert::nullOrScalar($collection);
+
+        return $this->repository->findByKeyAndCollection($key, $collection) !== null;
     }
 
-    public function get(string $key, mixed $default = null): mixed
+    public function get(string $key, mixed $default = null, ?string $collection = null): mixed
     {
-        return $this->repository->findByKey($key)?->getValue() ?? $default;
+        Assert::nullOrScalar($collection);
+
+        return $this->repository->findByKeyAndCollection($key, $collection)?->getValue() ?? $default;
     }
 
-    public function getMultiple(array $keys): array
+    public function getMultiple(array $keys, ?string $collection = null): array
     {
-        return array_map(fn($key) => $this->get($key), $keys);
-    }
+        Assert::allScalar($keys);
+        Assert::nullOrScalar($collection);
 
-    public function getAll(): array
-    {
         return array_reduce(
-            $this->repository->findAll(),
-            fn($result, $entry) => $result + [$entry->getKey() => $entry->getValue()],
+            $keys,
+            fn ($result, $key) => $result + [$key => $this->get($key, null, $collection)],
             []
         );
     }
 
-    public function set(string $key, mixed $value): void
+    public function getAll(?string $collection = null): array
     {
-        $keyValue = $this->repository->findByKey($key) ?? new KeyValue($key, $value);
+        Assert::nullOrScalar($collection);
+
+        $entries = $collection
+            ? $this->repository->findByCollection($collection)
+            : $this->repository->findAll();
+
+        return array_reduce(
+            $entries,
+            fn ($result, $entry) => $result + [$entry->getKey() => $entry->getValue()],
+            []
+        );
+    }
+
+    public function set(string $key, mixed $value, ?string $collection = null): void
+    {
+        Assert::nullOrScalar($collection);
+
+        $keyValue = $this->repository->findByKeyAndCollection($key, $collection)
+            ?? new KeyValue($key, $value, $collection);
+
         $keyValue->setValue($value);
         $this->repository->save($keyValue);
     }
 
-    public function setIfNotExists(string $key, mixed $value): bool
+    public function setIfNotExists(string $key, mixed $value, ?string $collection = null): bool
     {
-        if ($this->has($key)) {
+        Assert::nullOrScalar($collection);
+
+        if ($this->has($key, $collection)) {
             return false;
         }
-        $this->set($key, $value);
+
+        $this->set($key, $value, $collection);
         return true;
     }
 
-    public function setMultiple(array $data): void
+    public function setMultiple(array $data, ?string $collection = null): void
     {
-        array_walk($data, fn($value, $key) => $this->set($key, $value));
-    }
+        Assert::nullOrScalar($collection);
 
-    public function rename(string $key, string $newKey): void
-    {
-        if (!$this->has($newKey)) {
-            $keyValue = $this->repository->findByKey($key);
-            if ($keyValue) {
-                $keyValue->setKey($newKey);
-                $this->repository->save($keyValue);
-            }
+        foreach ($data as $key => $value) {
+            Assert::scalar($key);
+            $this->set($key, $value, $collection);
         }
     }
 
-    public function delete(string $key): void
+    public function rename(string $key, string $newKey, ?string $collection = null): bool
     {
-        if ($keyValue = $this->repository->findByKey($key)) {
+        Assert::nullOrScalar($collection);
+
+        if ($this->has($newKey, $collection)) {
+            return false;
+        }
+
+        $keyValue = $this->repository->findByKeyAndCollection($key, $collection);
+
+        if ($keyValue) {
+            $keyValue->setKey($newKey);
+            $this->repository->save($keyValue);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public function delete(string $key, ?string $collection = null): void
+    {
+        Assert::nullOrScalar($collection);
+        $keyValue = $this->repository->findByKeyAndCollection($key, $collection);
+
+        if ($keyValue) {
             $this->repository->remove($keyValue);
         }
     }
 
-    public function deleteMultiple(array $keys): void
+    public function deleteMultiple(array $keys, ?string $collection = null): void
     {
-        array_walk($keys, fn($key) => $this->delete($key));
+        Assert::allScalar($keys);
+        Assert::nullOrScalar($collection);
+
+        foreach ($keys as $key) {
+            $this->delete($key, $collection);
+        }
     }
 
-    public function deleteAll(): void
+    public function deleteAll(?string $collection = null): void
     {
+        Assert::nullOrScalar($collection);
+
+        if ($collection) {
+            $this->repository->deleteByCollection($collection);
+        }
+
         $this->repository->deleteAll();
     }
 }

@@ -8,7 +8,7 @@ use Hubertinio\SyliusKeyValuePlugin\Repository\KeyValueRepository;
 
 #[ORM\Entity(repositoryClass: KeyValueRepository::class)]
 #[ORM\Table(name: 'hubertinio_key_value')]
-class KeyValue
+class KeyValue implements KeyValueInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
