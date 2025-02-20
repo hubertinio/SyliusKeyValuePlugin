@@ -8,6 +8,7 @@ use Hubertinio\SyliusKeyValuePlugin\Repository\KeyValueRepository;
 
 #[ORM\Entity(repositoryClass: KeyValueRepository::class)]
 #[ORM\Table(name: 'hubertinio_key_value')]
+#[ORM\UniqueConstraint(name: 'key_collection', columns: ['`key`', 'collection'])]
 class KeyValue implements KeyValueInterface
 {
     #[ORM\Id]
@@ -15,7 +16,7 @@ class KeyValue implements KeyValueInterface
     #[ORM\Column(type: 'integer')]
     private int $id;
 
-    #[ORM\Column(type: 'string', length: 255, unique: true)]
+    #[ORM\Column(name: '`key`', type: 'string', length: 255, unique: false)]
     private string $key;
 
     #[ORM\Column(type: 'json', nullable: true)]

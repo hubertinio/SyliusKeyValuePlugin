@@ -53,9 +53,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services
         ->set($servicesIdPrefix . 'command.test', TestCommand::class)
-        ->arg('$keyValue', service($servicesIdPrefix . 'storage'))
-        ->arg('$keyValueCacheable', service($servicesIdPrefix . 'storage.cacheable'))
-        ->arg('$userKeyValue', service($servicesIdPrefix . 'storage.user'))
+        ->arg('$keyValueStorage', service($servicesIdPrefix . 'storage'))
+        ->arg('$keyValueStorageCacheable', service($servicesIdPrefix . 'storage.cacheable'))
+        ->arg('$userKeyValueStorage', service($servicesIdPrefix . 'storage.user'))
         ->tag('console.command')
         ->public();
 
