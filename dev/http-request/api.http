@@ -15,7 +15,7 @@ GET {{ host }}/api/v2/admin/key-value
 Authorization: Bearer {{jwt_token}}
 
 ### GET item
-GET {{ host }}/api/v2/admin/key-value/arr?collection=user_123
+GET {{ host }}/api/v2/admin/key-value/arr2
 Authorization: Bearer {{jwt_token}}
 
 ###

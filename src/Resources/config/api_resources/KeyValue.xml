@@ -64,7 +64,7 @@
             </itemOperation>
         </itemOperations>
 
-        <property name="id" identifier="false" writable="false" />
+        <property name="id" identifier="false" writable="false" readable="false" />
         <property name="key" identifier="true" required="true" readable="true" writable="true">
             <attribute name="openapi_context">
                 <attribute name="type">string</attribute>
@@ -72,6 +72,7 @@
             </attribute>
         </property>
         <property name="value" required="true" readable="true" writable="true">
+            <attribute name="groups">admin:key_value:read admin:key_value:write shop:key_value:read shop:key_value:write</attribute>
             <attribute name="openapi_context">
                 <attribute name="type">json</attribute>
                 <attribute name="example">{"color":"dark"}</attribute>

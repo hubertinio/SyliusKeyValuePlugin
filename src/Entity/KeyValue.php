@@ -5,6 +5,7 @@ namespace Hubertinio\SyliusKeyValuePlugin\Entity;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Hubertinio\SyliusKeyValuePlugin\Repository\KeyValueRepository;
+use JMS\Serializer\Annotation\Groups;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
 #[ORM\Entity(repositoryClass: KeyValueRepository::class)]
@@ -20,12 +21,15 @@ class KeyValue implements KeyValueInterface
     private int $id;
 
     #[ORM\Column(name: '`key`', type: 'string', length: 255, unique: false)]
+    #[Groups(['admin:key_value:read', 'admin:key_value:write'])]
     private string $key;
 
     #[ORM\Column(type: 'json', nullable: true)]
+    #[Groups(['admin:key_value:read', 'admin:key_value:write'])]
     private mixed $value = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['admin:key_value:read', 'admin:key_value:write'])]
     private ?string $collection = null;
 
     public function __construct(string $key, mixed $value = null, ?string $collection = null)
