@@ -21,3 +21,5 @@ Manage key/value storage collection.
 - handle remove user keys on user remove event
 - API platform support + tests
 - sylius resource: src/Resources/config/config.yaml
+- cache TTL
+- cache deps from parameter

@@ -2,11 +2,9 @@
 
 namespace Hubertinio\SyliusKeyValuePlugin\Entity;
 
-use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface KeyValueInterface extends
-    TimestampableInterface,
     ResourceInterface
 {
     public function getId(): int;

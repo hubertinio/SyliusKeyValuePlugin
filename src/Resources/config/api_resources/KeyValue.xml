@@ -1,90 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<resources xmlns="https://api-platform.com/schema/metadata"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd">
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <resource class="%hubertinio_sylius_key_value_plugin.model.key_value.class%" shortName="KeyValue">
-        <attribute name="validation_groups">hubertinio.key_value</attribute>
+    <mapped-superclass name="Hubertinio\SyliusKeyValuePlugin\Entity\KeyValue" table="hubertinio_key_value" repository-class="Hubertinio\SyliusKeyValuePlugin\Repository\KeyValueRepository">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
 
-        <collectionOperations>
-            <collectionOperation name="admin_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/key-value</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:key_value:read</attribute>
-                </attribute>
-            </collectionOperation>
+        <field name="key" column="`key`" type="string" length="255" unique="false">
+            <options>
+                <option name="groups">admin:key_value:read,admin:key_value:write</option>
+            </options>
+        </field>
 
-            <collectionOperation name="admin_post">
-                <attribute name="method">POST</attribute>
-                <attribute name="path">/admin/key-value</attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">admin:key_value:create</attribute>
-                </attribute>
-            </collectionOperation>
+        <field name="value" type="json" nullable="true">
+            <options>
+                <option name="groups">admin:key_value:read,admin:key_value:write</option>
+            </options>
+        </field>
 
-            <collectionOperation name="shop_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/key-value</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">shop:key_value:read</attribute>
-                </attribute>
-            </collectionOperation>
-        </collectionOperations>
+        <field name="collection" type="string" length="255" nullable="true">
+            <options>
+                <option name="groups">admin:key_value:read,admin:key_value:write</option>
+            </options>
+        </field>
 
-        <itemOperations>
-            <itemOperation name="admin_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/key-value/{key}</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:key_value:read</attribute>
-                </attribute>
-            </itemOperation>
+        <field name="createdAt" type="datetime" column="created_at">
+            <gedmo:timestampable on="create" />
+        </field>
 
-            <itemOperation name="admin_put">
-                <attribute name="method">PUT</attribute>
-                <attribute name="path">/admin/key-value/{key}</attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">admin:key_value:update</attribute>
-                </attribute>
-            </itemOperation>
+        <field name="updatedAt" type="datetime" column="updated_at">
+            <gedmo:timestampable on="update" />
+        </field>
 
-            <itemOperation name="admin_delete">
-                <attribute name="method">DELETE</attribute>
-                <attribute name="path">/admin/key-value/{key}</attribute>
-            </itemOperation>
-
-            <itemOperation name="shop_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/key-value/{key}</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">shop:key_value:read</attribute>
-                </attribute>
-            </itemOperation>
-        </itemOperations>
-
-        <property name="id" identifier="false" writable="false" readable="false" />
-        <property name="key" identifier="true" required="true" readable="true" writable="true">
-            <attribute name="openapi_context">
-                <attribute name="type">string</attribute>
-                <attribute name="example">theme</attribute>
-            </attribute>
-        </property>
-        <property name="value" required="true" readable="true" writable="true">
-            <attribute name="groups">admin:key_value:read admin:key_value:write shop:key_value:read shop:key_value:write</attribute>
-            <attribute name="openapi_context">
-                <attribute name="type">json</attribute>
-                <attribute name="example">{"color":"dark"}</attribute>
-            </attribute>
-        </property>
-        <property name="collection" required="false" readable="true" writable="true">
-            <attribute name="openapi_context">
-                <attribute name="type">string</attribute>
-                <attribute name="example">user_preferences</attribute>
-            </attribute>
-        </property>
-        <property name="createdAt" writable="false" readable="true"/>
-        <property name="updatedAt" writable="false" readable="true"/>
-    </resource>
-</resources>
+        <unique-constraints>
+            <unique-constraint name="hubertinio_key_value_unique" columns="`key`,collection" />
+        </unique-constraints>
+    </mapped-superclass>
+</doctrine-mapping>

@@ -105,6 +105,9 @@ composer-validate: ## Validate composer json and lock
 migrate:
 	$(SYMFONY) doctrine:migrations:migrate
 
+migrations-diff:
+	$(SYMFONY) doctrine:migrations:diff --em=default --namespace=Hubertinio\\SyliusKeyValuePlugin\\Migrations
+
 migrations-status:
 	$(SYMFONY) doctrine:migrations:status
 
