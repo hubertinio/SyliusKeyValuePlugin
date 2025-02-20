@@ -1,0 +1,11 @@
+sylius_resource:
+  resources:
+    hubertinio_sylius_key_value_plugin.key_value:
+      driver: doctrine/orm
+      classes:
+        model: Hubertinio\SyliusKeyValuePlugin\Entity\KeyValue
+        interface: Hubertinio\SyliusKeyValuePlugin\Entity\KeyValueInterface
+        form: ~
+        repository: Hubertinio\SyliusKeyValuePlugin\Repository\KeyValueRepository
+        controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+        factory: Sylius\Component\Resource\Factory\Factory

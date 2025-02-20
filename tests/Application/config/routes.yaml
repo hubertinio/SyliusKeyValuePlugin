@@ -1,9 +1,0 @@
-hubertinio_sylius_key_value_shop:
-    resource: "@HubertinioSyliusKeyValuePlugin/config/shop_routing.yaml"
-    prefix: /{_locale}
-    requirements:
-        _locale: ^[a-z]{2}(?:_[A-Z]{2})?$
-
-hubertinio_sylius_key_value_admin:
-    resource: "@HubertinioSyliusKeyValuePlugin/config/admin_routing.yaml"
-    prefix: /admin

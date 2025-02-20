@@ -21,7 +21,7 @@ final class HubertinioSyliusKeyValueExtension extends AbstractResourceExtension 
         $configuration = new Configuration();
         $this->processConfiguration($configuration, $configs);
 
-        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.php');
     }
 
@@ -32,12 +32,12 @@ final class HubertinioSyliusKeyValueExtension extends AbstractResourceExtension 
 
     protected function getMigrationsNamespace(): string
     {
-        return 'DoctrineMigrations';
+        return 'Hubertinio\SyliusKeyValuePlugin\Migrations';
     }
 
     protected function getMigrationsDirectory(): string
     {
-        return '@HubertinioSyliusKeyValuePlugin/migrations';
+        return '@HubertinioSyliusKeyValuePlugin/Migrations';
     }
 
     protected function getNamespacesOfMigrationsExecutedBefore(): array

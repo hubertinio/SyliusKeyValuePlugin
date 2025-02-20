@@ -4,7 +4,7 @@ namespace Hubertinio\SyliusKeyValuePlugin\Storage;
 
 use Psr\Cache\CacheItemPoolInterface;
 
-class KeyValueStorageCachable implements KeyValueStorageInterface
+class KeyValueStorageCacheable implements KeyValueStorageInterface
 {
     public function __construct(
         private readonly KeyValueStorageInterface $keyValueStorage,
