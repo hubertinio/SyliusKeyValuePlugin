@@ -18,7 +18,6 @@ Manage key/value storage collection.
 
 ## TODO
 
-- remove frontend
+- sylius resource: src/Resources/config/config.yaml
 - API platform support + tests
 - channel support + tests
-- redis (adapter) support + tests  
